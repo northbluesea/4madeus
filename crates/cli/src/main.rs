@@ -1,4 +1,4 @@
-﻿use anyhow::Result;
+use anyhow::Result;
 use clap::{Parser, Subcommand};
 use colored::*;
 use fourmadeus_core::{LockedServer, Lockfile};
@@ -32,8 +32,8 @@ enum Commands {
     Run {
         #[arg(long)]
         id: String,
-        #[arg(long, default_value_t = true)]
-        enforce: bool,
+        #[arg(long, default_value_t = false)]
+        observe: bool,
         #[arg(trailing_var_arg = true, required = true)]
         cmd: Vec<String>,
     },
@@ -139,13 +139,13 @@ async fn main() -> Result<()> {
             }
         }
 
-        Commands::Run { id, enforce, cmd } => {
+        Commands::Run { id, observe, cmd } => {
             let exe = &cmd[0];
             let args = &cmd[1..];
             let cfg = ProxyConfig {
                 server_id: id,
                 lock_path: PathBuf::from("4madeus.lock"),
-                enforce,
+                enforce: !observe,
             };
             let code = run_stdio_proxy(exe, args, cfg).await?;
             std::process::exit(code);
