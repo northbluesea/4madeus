@@ -1,0 +1,12 @@
+﻿[package]
+name = "fourmadeus-proxy"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+fourmadeus-core = { path = "../core" }
+tokio = { version = "1.40", features = ["full"] }
+serde_json = "1.0"
+memchr = "2.7"
+chrono = "0.4"
+anyhow = "1.0"

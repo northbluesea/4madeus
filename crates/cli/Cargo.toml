@@ -1,0 +1,18 @@
+﻿[package]
+name = "fourmadeus-cli"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "4madeus"
+path = "src/main.rs"
+
+[dependencies]
+fourmadeus-core = { path = "../core" }
+fourmadeus-discovery = { path = "../discovery" }
+fourmadeus-proxy = { path = "../proxy" }
+clap = { version = "4.5", features = ["derive"] }
+colored = "2.1"
+serde_json = "1.0"
+tokio = { version = "1.40", features = ["full"] }
+anyhow = "1.0"
